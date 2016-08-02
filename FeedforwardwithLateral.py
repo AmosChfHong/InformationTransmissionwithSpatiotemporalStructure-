@@ -57,8 +57,8 @@ tau_se = 2*ms
 tau_si = 5*ms
 ENoiseRat = 2*Hz
 INoiseRat = 12.5*Hz
-ENoiseNum = 180*100
-INoiseNum = 20*100
+ENoiseNum = 18000*4
+INoiseNum = 2000*4
 #Neuron Group Parameters
 ExcNum = InputNum
 LatNum = 100
@@ -98,31 +98,31 @@ LatNeuron = NeuronGroup(LatNum*(LayerNum),
 w_e = 0.30*nS
 w_i = 0.16*nS
 
-P1 = PoissonInput(ExcNeuron,'gExc',N=ENoiseNum,rate=ENoiseRat, weight=w_e)
-P2 = PoissonInput(ExcNeuron,'gInh',N=INoiseNum,rate=INoiseRat, weight=w_i)   
-P3 = PoissonInput(LatNeuron,'gExc',N=ENoiseNum,rate=ENoiseRat, weight=w_e)
-P4 = PoissonInput(LatNeuron,'gInh',N=INoiseNum,rate=INoiseRat, weight=w_i)  
+#P1 = PoissonInput(ExcNeuron,'gExc',N=ENoiseNum,rate=ENoiseRat, weight=w_e)
+#P2 = PoissonInput(ExcNeuron,'gInh',N=INoiseNum,rate=INoiseRat, weight=w_i)   
+#P3 = PoissonInput(LatNeuron,'gExc',N=ENoiseNum,rate=ENoiseRat, weight=w_e)
+#P4 = PoissonInput(LatNeuron,'gInh',N=INoiseNum,rate=INoiseRat, weight=w_i)  
                                                                 
-#P1 = PoissonGroup(N=ENoiseNum,rates=ENoiseRat)
-#P2 = PoissonGroup(N=INoiseNum,rates=INoiseRat)
-#
-#P1Link = Synapses(P1, ExcNeuron, model="w:siemens",
-#                     pre="gExc_post += w")
-#P2Link = Synapses(P2, ExcNeuron, model="w:siemens",
-#                     pre="gInh_post += w")
-#P3Link = Synapses(P1, LatNeuron, model="w:siemens",
-#                     pre="gExc_post += w")
-#P4Link = Synapses(P2, LatNeuron, model="w:siemens",
-#                     pre="gInh_post += w")                     
-#P1Link.connect(True,p=0.25)
-#P2Link.connect(True,p=0.25)
-#P3Link.connect(True,p=0.25)
-#P4Link.connect(True,p=0.25)
-#
-#P1Link.w[:,:] = w_e
-#P2Link.w[:,:] = w_i
-#P3Link.w[:,:] = w_e
-#P4Link.w[:,:] = w_i
+P1 = PoissonGroup(N=ENoiseNum,rates=ENoiseRat)
+P2 = PoissonGroup(N=INoiseNum,rates=INoiseRat)
+
+P1Link = Synapses(P1, ExcNeuron, model="w:siemens",
+                     pre="gExc_post += w")
+P2Link = Synapses(P2, ExcNeuron, model="w:siemens",
+                     pre="gInh_post += w")
+P3Link = Synapses(P1, LatNeuron, model="w:siemens",
+                     pre="gExc_post += w")
+P4Link = Synapses(P2, LatNeuron, model="w:siemens",
+                     pre="gInh_post += w")                     
+P1Link.connect(True,p=0.25)
+P2Link.connect(True,p=0.25)
+P3Link.connect(True,p=0.25)
+P4Link.connect(True,p=0.25)
+
+P1Link.w[:,:] = w_e
+P2Link.w[:,:] = w_i
+P3Link.w[:,:] = w_e
+P4Link.w[:,:] = w_i
 
 
 ExcNeuron.v[:] = "Vth*1.1"
