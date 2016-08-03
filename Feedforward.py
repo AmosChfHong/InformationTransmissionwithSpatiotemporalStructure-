@@ -128,8 +128,8 @@ P4Link.w[:,:] = w_i
 
 ExcNeuron.v[:] = "-(47)*mV"
 LatNeuron.v =  "-(46 + rand())*mV"
-ExcNeuron.gExc = 10*nS
-ExcNeuron.gInh = 10*nS
+ExcNeuron.gExc = 30*nS
+ExcNeuron.gInh = 30*nS
 ExcNeuron.Cm = 400*pF
 LatNeuron.Cm = 300*pF  
 #%% Network Connection 
