@@ -97,8 +97,8 @@ LatNeuron = NeuronGroup(LatNum*(LayerNum),model=NeuDyn,
                         reset='v=Vre', refractory = 2*ms)
                                                                       
 #Delare Independent Noise
-w_e = 0.15*nS
-w_i = 0.05*nS
+w_e = 0.40*nS
+w_i = 0.25*nS
 
 #P1 = PoissonInput(ExcNeuron,'gExc',N=ENoiseNum,rate=ENoiseRat, weight=w_e)
 #P2 = PoissonInput(ExcNeuron,'gInh',N=INoiseNum,rate=INoiseRat, weight=w_i)   
