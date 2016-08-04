@@ -97,8 +97,8 @@ LatNeuron = NeuronGroup(LatNum*(LayerNum),model=NeuDyn,
                         reset='v=Vre', refractory = 2*ms)
                                                                       
 #Delare Independent Noise
-w_e = 0.40*nS
-w_i = 0.25*nS
+w_e = 0.35*nS
+w_i = 0.21*nS
 
 #P1 = PoissonInput(ExcNeuron,'gExc',N=ENoiseNum,rate=ENoiseRat, weight=w_e)
 #P2 = PoissonInput(ExcNeuron,'gInh',N=INoiseNum,rate=INoiseRat, weight=w_i)   
@@ -141,7 +141,7 @@ P_el = 0.2
 P_le = 0.6
 
 #Snaptic Weight
-w_ee = 0.9*nS #4.5*nS #2.0 ff
+w_ee = 1.0*nS #4.5*nS #2.0 ff
 w_el = 00.0*nS 
 
 w_le = 0.0*nS#3.6*nS
@@ -194,7 +194,7 @@ for Ind in range(LayerNum-1):
                       
     
 #Set Weights
-sigma = 2.0
+sigma = 2.5
 
 LN = len(IELink.w)
 IELink.w[:,:] = clip(np.random.lognormal(log(w_ee/nS)-0.5*sigma**2,sigma,LN)*nS,0,50*w_ee)
